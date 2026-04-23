@@ -9,19 +9,7 @@ class Video < ApplicationRecord
 
   private
 
-  # Broadcast real-time notification to all subscribers
   def broadcast_new_video
-    ActionCable.server.broadcast(
-      "notifications_channel",
-      {
-        type: "new_video",
-        video_id: id,
-        video_title: title,
-        thumbnail_url: thumbnail_url,
-        shared_by: user.name,
-        shared_by_email: user.email,
-        created_at: created_at.iso8601
-      }
-    )
+    BroadcastVideoJob.perform_later(id)
   end
 end

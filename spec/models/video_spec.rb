@@ -19,12 +19,11 @@ RSpec.describe Video, type: :model do
   end
 
   describe "broadcast" do
-    it "broadcasts to notifications_channel after create" do
+    it "enqueues BroadcastVideoJob after create" do
       user = create(:user)
       expect {
         create(:video, user: user)
-      }.to have_broadcasted_to("notifications_channel")
-        .with(hash_including(type: "new_video"))
+      }.to have_enqueued_job(BroadcastVideoJob)
     end
   end
 end
