@@ -43,4 +43,4 @@ COPY --chmod=755 bin/docker-entrypoint /rails/bin/docker-entrypoint
 
 EXPOSE 3000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-CMD ["sh", "-c", "./bin/rails server -b 0.0.0.0 -p ${PORT:-3000}"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
