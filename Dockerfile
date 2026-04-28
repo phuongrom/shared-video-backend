@@ -42,4 +42,5 @@ USER 1000:1000
 COPY --chmod=755 bin/docker-entrypoint /rails/bin/docker-entrypoint
 
 EXPOSE 3000
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
