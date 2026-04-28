@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: shared-video-backend
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: bundle install
+    preDeployCommand: bundle exec rails db:migrate
+    startCommand: bundle exec puma -C config/puma.rb
+    envVars:
+      - key: RAILS_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - key: CORS_ORIGINS
+        sync: false
